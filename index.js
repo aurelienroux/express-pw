@@ -13,16 +13,27 @@ app.get("/", (req, res) => {
   res.send("hello me");
 });
 
-app.get(
-  "/users",
-  (req, res, next) => {
-    console.log("req in first");
-    next();
-  },
-  (req, res) => {
-    res.send("users page");
-  }
-);
+const logger = (req, res, next) => {
+  // eslint-disable-next-line no-console
+  console.log(`logger function`);
+  next();
+};
+
+function requestTime(req, res, next) {
+  req.requestTime = Date.now();
+
+  next();
+}
+
+app.use(logger);
+app.use(requestTime);
+
+app.get("/users", (req, res) => {
+  let responseText = "Hello World!<br>";
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+
+  res.send(responseText);
+});
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
