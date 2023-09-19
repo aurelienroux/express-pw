@@ -14,14 +14,14 @@ app.use(cookieParser());
 app.use("/misc", misc);
 app.use(logger);
 app.use(requestTime);
+app.set("views", "./views");
+app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
   // Cookies that have not been signed
   console.log("Cookies: ", req.cookies);
-  // Cookies that have been signed
-  console.log("Signed Cookies: ", req.signedCookies);
 
-  res.send("hello express");
+  res.render("index", { title: "hey", message: "hello express" });
 });
 
 app.get("/users/:id", (req, res) => {
