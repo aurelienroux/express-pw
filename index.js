@@ -21,7 +21,10 @@ app.get("/", (req, res) => {
   // Cookies that have not been signed
   console.log("Cookies: ", req.cookies);
 
-  res.render("index", { title: "hey", message: "hello express" });
+  res.render("index", {
+    title: "test react express",
+    message: "hello express",
+  });
 });
 
 app.get("/users/:id", (req, res) => {
