@@ -24,8 +24,8 @@ app.get("/", (req, res) => {
   res.send("hello express");
 });
 
-app.get("/users", (req, res) => {
-  let responseText = "Hello World!<br>";
+app.get("/users/:id", (req, res) => {
+  let responseText = `Hello World! id:${req.params.id}<br>`;
   responseText += `<small>Requested at: ${req.requestTime}</small>`;
 
   res.send(responseText);
